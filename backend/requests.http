@@ -1,0 +1,37 @@
+### ---------------------------------------------------------------
+### Try the API without a frontend.
+### In VS Code install the "REST Client" extension, then click
+### "Send Request" above each block.
+### Change @base to your Render URL to test production.
+### ---------------------------------------------------------------
+@base = http://localhost:5000
+
+### 1. Is the server alive?
+GET {{base}}/api/health
+
+### 2. Start a run - copy the runId from the response
+POST {{base}}/api/start
+Content-Type: application/json
+
+{ "nickname": "Asha", "arena": "global" }
+
+### 3. Answer "do nothing" (paste your runId)
+POST {{base}}/api/answer
+Content-Type: application/json
+
+{ "runId": "PASTE_RUN_ID_HERE", "action": "none", "color": null, "reactionMs": null, "holdMs": null }
+
+### 4. Try to cheat: claim a 5 ms reaction. The referee should say "invalid_timing".
+POST {{base}}/api/answer
+Content-Type: application/json
+
+{ "runId": "PASTE_RUN_ID_HERE", "action": "click", "color": "red", "reactionMs": 5, "holdMs": null }
+
+### 5. Leaderboard
+GET {{base}}/api/leaderboard?limit=10&arena=global
+
+### 6. Validation: a 1-letter nickname should return 422
+POST {{base}}/api/start
+Content-Type: application/json
+
+{ "nickname": "x" }

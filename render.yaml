@@ -1,0 +1,22 @@
+# Optional "Blueprint" for Render: the same settings as the manual steps in
+# docs/05-deploy-backend-render.md, written as code.
+# Render dashboard > New > Blueprint > pick this repo.
+services:
+  - type: web
+    name: reflex-arena-api
+    runtime: node
+    plan: free
+    region: singapore # closest Render region to India
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: MONGODB_URI
+        sync: false # Render will ask you to paste it (it is a secret)
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: ENABLE_STRETCH
+        value: "false"

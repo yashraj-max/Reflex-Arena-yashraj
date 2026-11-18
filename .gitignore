@@ -1,0 +1,18 @@
+# Dependencies (re-created by "npm install")
+node_modules/
+
+# Secrets - NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# Build output (Vercel builds it for you)
+dist/
+
+# Logs and OS junk
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
